@@ -1,0 +1,17 @@
+button {
+    background-color: #35408E;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: absolute;
+    bottom: 90px;
+    right: 200px;
+    font-size: 16px;
+    text-align: center;
+    border: none; /* Add this line to remove the border */
+}
+
+button:hover {
+    background-color: #2d3777;
+}

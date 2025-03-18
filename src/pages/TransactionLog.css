@@ -1,0 +1,41 @@
+.transaction-log {
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+th, td {
+  border: 1px solid #35408E;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #35408E;
+  font-weight: bold;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.transaction-log table {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1em;
+  margin-top: 250px;
+  margin-right: 30px;
+}
+
+.filter-container button {
+  margin-right: 120px; 
+  bottom: 860px;
+  right: 50px;
+}
+
+.sort-container button {
+  margin-right: 0px;
+  bottom: 860px;
+  right: 60px;
+}
