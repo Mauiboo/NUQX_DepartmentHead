@@ -4,34 +4,32 @@
     height: 300px;
 }
 
-select {
-    padding: 12px 25px;
-    background-color: #35408E;
-    color: white;
+.dropdown {
+    background-color: white;
+    color: #35408E;
+    border: 1px solid #35408E;
     appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg fill="blue-800" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
     background-repeat: no-repeat;
     background-position: right 10px center;
-    padding-right: 30px;
-    font-size: 16px;
+    font-size: 18px;
     width: 200px;
+    height: 50px;
     position: absolute;
-    bottom: 825px;
-    right: 1220px;
+    bottom: 820px;
+    right: 770px;
     text-align: center;
-    border: none; /* Add this line to remove the border */
+    padding: 12px 0;
+    border-radius: 3px;
+    cursor: pointer;
+    left: 450px;
 }
 
-select:focus {
-    border-color: #35408E;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+.dropdown option {
+    background-color: white;
+    color: #35408E;
 }
 
-select option {
-    background-color: #f0f0f0;
-    color: #333;
-}
-
-select option:hover {
+.dropdown option:hover {
     background-color: #e0e0e0;
 }

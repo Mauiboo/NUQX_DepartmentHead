@@ -3,10 +3,12 @@ import './Dropdown.css';
 
 const Dropdown = () => {
   return (
-    <select className="bg-blue-800 text-white p-2 rounded">
-      <option>Admission</option>
-      <option>Enrollment</option>
-      <option>Accounting</option>
+    <select className="dropdown">
+      <option>Today</option>
+      <option>Week</option>
+      <option>Month</option>
+      <option>Term</option>
+      <option>Year</option>
     </select>
   );
 };

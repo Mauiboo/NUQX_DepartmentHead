@@ -6,8 +6,8 @@ function NavAvatar() {
   return (
     <div className="nav-avatar-container">
   <div className="text-info">
-    <div className="nav-avatar-name">Katherine M. Petrova</div>
-    <div className="nav-avatar-title">System Administrator</div>
+    <div className="nav-avatar-name">Klaus Mikaelson</div>
+    <div className="nav-avatar-title">Head Department</div>
   </div>
   <img
     src={profileImg}

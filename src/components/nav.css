@@ -22,7 +22,8 @@
     flex-direction: column;
     text-align: right;
     justify-content: center;
-    margin: -20px;
+    margin: 24px;
+
 
   }
   
@@ -30,9 +31,7 @@
     font-size: 1.2rem;
     font-weight: 200; 
     color: white;
-    margin: 0;
-    text-align: right;
-    
+    text-align: right;    
   }
   
   .nav-avatar-title {

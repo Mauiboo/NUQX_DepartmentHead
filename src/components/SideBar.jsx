@@ -10,7 +10,6 @@ import {
   RiLogoutCircleLine 
 } from 'react-icons/ri';
 
-// ✅ Custom Modal Component
 const Modal = ({ show, onClose, onConfirm }) => {
   if (!show) return null;
 
@@ -36,8 +35,7 @@ function SideBar() {
   };
 
   const handleConfirmLogout = () => {
-    // Perform logout logic here (e.g., clear tokens, session data)
-    navigate('/login'); // Replace '/login' with your actual login route
+    navigate('/login'); 
     setShowLogoutConfirm(false);
   };
 
@@ -50,27 +48,27 @@ function SideBar() {
       <div className="divider bottom"></div>
       <ul className="sidebar-nav" id="sidebar-nav">
         <li className="nav-item">
+          <Link to="/dashboard" className="nav-link">
+          <RiFileListLine className="me-2" />
+            <span>Dashboard</span>
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link to="/reports" className="nav-link">
-            <RiBarChartFill className="me-2" />
-            <span>Reports</span>
+          <RiBarChartFill className="me-2" />
+          <span>Reports</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/transactionlog" className="nav-link">
-            <RiFileListLine className="me-2" />
-            <span>Transaction Log</span>
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/systemhealth" className="nav-link">
+          <Link to="/services" className="nav-link">
             <RiDashboardLine className="me-2" />
-            <span>System Health</span>
+            <span>Services</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/executives" className="nav-link">
+          <Link to="/staff" className="nav-link">
             <RiTeamLine className="me-2" />
-            <span>Executives</span>
+            <span>Staff</span>
           </Link>
         </li>
         <li className="nav-item">

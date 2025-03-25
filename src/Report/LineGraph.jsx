@@ -17,17 +17,17 @@ const data = [
     { name: 'FEB 10', time: 1020 } // 5:00 PM
 ];
 
-// Function to convert minutes to Philippine Time (PHT)
+
 const formatPHT = (minutes) => {
-    const referenceDate = new Date(); // Get current date
-    referenceDate.setHours(0, 0, 0, 0); // Reset to midnight
-    referenceDate.setMinutes(minutes); // Add minutes to get real-time value
+    const referenceDate = new Date(); 
+    referenceDate.setHours(0, 0, 0, 0); 
+    referenceDate.setMinutes(minutes); 
 
     return referenceDate.toLocaleTimeString('en-PH', {
         hour: '2-digit',
         minute: '2-digit',
-        hour12: true, // Show AM/PM format
-        timeZone: 'Asia/Manila' // Ensure it's Philippine Time
+        hour12: true, 
+        timeZone: 'Asia/Manila' 
     });
 };
 
@@ -35,18 +35,18 @@ const LineGraph = () => {
     return (
         <div className="line-graph-container">
             <ResponsiveContainer width="100%" height={300}>
-                <LineChart
-                    data={data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    {/* Format Y-Axis values as Philippine Time */}
-                    <YAxis tickFormatter={formatPHT} />
-                    <Tooltip formatter={(value) => formatPHT(value)} />
-                    <Line type="monotone" dataKey="time" stroke="#35408E" activeDot={{ r: 8 }} />
-                </LineChart>
-            </ResponsiveContainer>
+    <LineChart
+        data={data}
+        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+    >
+        
+        <XAxis dataKey="name" />
+        <YAxis tickFormatter={formatPHT} />
+        <Tooltip formatter={(value) => formatPHT(value)} />
+        <Line type="monotone" dataKey="time" stroke="#35408E" activeDot={{ r: 8 }} />
+    </LineChart>
+</ResponsiveContainer>
+
 
             <div className="avg-turnaround-time">
                 <p>
