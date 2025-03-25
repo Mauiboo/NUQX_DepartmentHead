@@ -3,15 +3,38 @@ import profileImg from "../images/user.png";
 import "./EditUser.css";
 
 const EditUser = ({ onClose }) => {
+  const [selectedImage, setSelectedImage] = useState(profileImg);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="modal-content">
       <span className="close-button" onClick={onClose}>&times;</span>
 
-      {/* Profile Image inside modal */}
-      <img src={profileImg} alt="Profile" className="modal-avatar-img" />
+      <div className="modal-avatar-container">
+        <img src={selectedImage} alt="Profile" className="modal-avatar-img" />
+        <label htmlFor="upload-avatar" className="upload-icon">
+          <i className="ri-camera-fill"></i>
+        </label>
+        <input 
+          type="file" 
+          id="upload-avatar" 
+          accept="image/*" 
+          style={{ display: 'none' }} 
+          onChange={handleImageUpload} 
+        />
+      </div>
 
       <div className="form-container">
-        {/* Left Column: Name Fields */}
         <div className="column">
           <div className="form-group">
             <label>First Name</label>
@@ -27,7 +50,6 @@ const EditUser = ({ onClose }) => {
           </div>
         </div>
 
-        {/* Right Column: Credentials */}
         <div className="column credentials-column">
           <div className="form-group email-group">
             <label>Email</label>
@@ -45,10 +67,11 @@ const EditUser = ({ onClose }) => {
       </div>
 
       <div className="button-group">
-        <button className="submit-button">Save Changes</button>
+        <button className="submit-button">Submit</button>
         <button className="clear-button">Clear</button>
       </div>
     </div>
   );
 };
+
 export default EditUser;

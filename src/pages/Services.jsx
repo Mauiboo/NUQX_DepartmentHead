@@ -1,4 +1,3 @@
-// src/pages/Services.jsx
 import React, { useState } from "react";
 import ServiceForm from "../Services/ServiceForm";
 import ServicesList from "../Services/ServiceList";

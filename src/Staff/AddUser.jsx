@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import profileImg from "../images/user.png"; 
 import "./AddUser.css"; 
 
 const AddUser = ({ onClose }) => {
+  const [selectedImage, setSelectedImage] = useState(profileImg);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="modal-content">
       <span className="close-button" onClick={onClose}>&times;</span>
 
-      <img src={profileImg} alt="Profile" className="modal-avatar-img" />
+      <div className="modal-avatar-container">
+        <img src={selectedImage} alt="Profile" className="modal-avatar-img" />
+        <label htmlFor="upload-avatar" className="upload-icon">
+          <i className="ri-camera-fill"></i>
+        </label>
+        <input 
+          type="file" 
+          id="upload-avatar" 
+          accept="image/*" 
+          style={{ display: 'none' }} 
+          onChange={handleImageUpload} 
+        />
+      </div>
 
       <div className="form-container">
         <div className="column">

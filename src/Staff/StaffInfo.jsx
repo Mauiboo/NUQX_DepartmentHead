@@ -36,7 +36,6 @@ const StaffInfo = ({ staff }) => {
         </div>
       ))}
 
-      {/* Modal for Editing User */}
       {isEditModalOpen && selectedUser && (
         <EditUser user={selectedUser} onClose={() => setIsEditModalOpen(false)} />
       )}

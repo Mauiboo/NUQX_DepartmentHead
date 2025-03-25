@@ -41,7 +41,6 @@ const ServiceForm = () => {
       />
       <div className="char-counter">{description.length}/{maxChars}</div>
 
-      {/* Button Group */}
       <div className="button-group">
         <button className="submit-btn" onClick={handleSubmit}>Submit</button>
         <button className="clear-btn" onClick={handleClear}>Clear</button>

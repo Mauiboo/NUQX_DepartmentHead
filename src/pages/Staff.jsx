@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, BadgeCheck, Filter, UserPlus } from "lucide-react";
 import AddUser from "../Staff/AddUser";
-import StaffInfo from "../Staff/StaffInfo"; // Import StaffInfo
+import StaffInfo from "../Staff/StaffInfo"; 
 import "./Staff.css";
 
 const staffData = [
@@ -34,7 +34,7 @@ const staffData = [
 
 const Staff = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate(); 
 
   return (
     <div className="staff-container">

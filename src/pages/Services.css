@@ -104,19 +104,16 @@ th {
   cursor: pointer;
   right: 1230px;
   position: fixed;
-
   width: 100px;
-  height: 40px; /* Ensure it has enough height */
+  height: 40px; 
   margin-bottom: 50px;
-
-  display: flex;          /* Enables flexbox */
-  justify-content: center; /* Centers text horizontally */
-  align-items: center;    /* Centers text vertically */
-
-  text-align: center; /* Ensures text is centered */
-  border: none; /* Optional: Removes default border */
-  border-radius: 5px; /* Optional: Adds rounded corners */
-  cursor: pointer; /* Optional: Makes it clickable */
+  display: flex;          
+  justify-content: center; 
+  align-items: center;   
+  text-align: center; 
+  border: none;
+  border-radius: 5px; 
+  cursor: pointer; 
 }
 
 .submit-btn:hover {
@@ -132,18 +129,18 @@ th {
   cursor: pointer;
   right: 1120px;
   width: 100px;
-  height: 40px; /* Ensure it has enough height */
+  height: 40px; 
   margin-bottom: 50px;
   position: fixed;
 
-  display: flex;          /* Enables flexbox */
-  justify-content: center; /* Centers text horizontally */
-  align-items: center;    /* Centers text vertically */
+  display: flex;         
+  justify-content: center; 
+  align-items: center;    
 
-  text-align: center; /* Ensures text is centered */
-  border: none; /* Optional: Removes default border */
-  border-radius: 5px; /* Optional: Adds rounded corners */
-  cursor: pointer; /* Optional: Makes it clickable */
+  text-align: center; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
 }
 
 .clear-btn:hover {
