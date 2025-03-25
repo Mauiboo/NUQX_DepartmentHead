@@ -309,7 +309,7 @@ const Settings = () => {
                   style={{
                     position: 'absolute',
                     right: '10px',
-                    top: '50%',
+                    top: '20%',
                     transform: 'translateY(-50%)',
                     background: 'none',
                     border: 'none',
@@ -353,7 +353,7 @@ const Settings = () => {
                   style={{
                     position: 'absolute',
                     right: '10px',
-                    top: '50%',
+                    top: '20%',
                     transform: 'translateY(-50%)',
                     background: 'none',
                     border: 'none',
@@ -397,7 +397,7 @@ const Settings = () => {
                   style={{
                     position: 'absolute',
                     right: '10px',
-                    top: '50%',
+                    top: '20%',
                     transform: 'translateY(-50%)',
                     background: 'none',
                     border: 'none',
@@ -415,17 +415,16 @@ const Settings = () => {
         {/* Save Changes Button */}
         <div style={{
           gridColumn: '2',
-          gridRow: '6',
+          gridRow: '2',
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          marginTop: '20px',
+          transform: 'translateX(90px)', 
+          marginTop: '100px',
           
+
         }}>
           <button 
             onClick={handleSubmit} 
             style={{
-              position: 'absolute',
               backgroundColor: '#35408E',
               color: 'white',
               padding: '10px 30px',

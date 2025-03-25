@@ -7,11 +7,9 @@ const AddUser = ({ onClose }) => {
     <div className="modal-content">
       <span className="close-button" onClick={onClose}>&times;</span>
 
-      {/* Profile Image inside modal */}
       <img src={profileImg} alt="Profile" className="modal-avatar-img" />
 
       <div className="form-container">
-        {/* Left Column: Name Fields */}
         <div className="column">
           <div className="form-group">
             <label>First Name</label>
@@ -27,7 +25,6 @@ const AddUser = ({ onClose }) => {
           </div>
         </div>
 
-        {/* Right Column: Credentials */}
         <div className="column credentials-column">
           <div className="form-group email-group">
             <label>Email</label>

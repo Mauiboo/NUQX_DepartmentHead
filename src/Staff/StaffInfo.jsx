@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Edit, Trash2 } from "lucide-react";
 import "./StaffInfo.css"; 
 import EditUser from "./EditUser"; 
+import profileImg from "../images/user.png"; 
+
 
 const StaffInfo = ({ staff }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -17,7 +19,7 @@ const StaffInfo = ({ staff }) => {
       {staff.map((user) => (
         <div key={user.id} className="staff-card">
           <div className="avatar-container">
-            <img src={user.avatar} alt={user.name} className="avatar" />
+           <img src={profileImg} alt="Profile" className="modal-avatar-img1" />
           </div>
           <div className="staff-details">
             <h3>{user.name}</h3>

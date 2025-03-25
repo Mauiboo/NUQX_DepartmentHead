@@ -9,22 +9,7 @@ import {
   RiSettings4Line, 
   RiLogoutCircleLine 
 } from 'react-icons/ri';
-
-const Modal = ({ show, onClose, onConfirm }) => {
-  if (!show) return null;
-
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <p className="modal-message">Are you sure you want to log out?</p>
-        <div className="modal-actions">
-          <button className="modal-cancel" onClick={onClose}>No</button>
-          <button className="modal-submit" onClick={onConfirm}>Yes</button>
-        </div>
-      </div>
-    </div>
-  );
-};
+import Modal from './Modal';
 
 function SideBar() {
   const navigate = useNavigate();
@@ -35,28 +20,28 @@ function SideBar() {
   };
 
   const handleConfirmLogout = () => {
-    navigate('/login'); 
     setShowLogoutConfirm(false);
+    navigate('/login'); 
   };
 
   const handleCancelLogout = () => {
     setShowLogoutConfirm(false);
   };
-
+  
   return (
     <aside id="sidebar" className="sidebar">
       <div className="divider bottom"></div>
       <ul className="sidebar-nav" id="sidebar-nav">
         <li className="nav-item">
           <Link to="/dashboard" className="nav-link">
-          <RiFileListLine className="me-2" />
+            <RiFileListLine className="me-2" />
             <span>Dashboard</span>
           </Link>
         </li>
         <li className="nav-item">
           <Link to="/reports" className="nav-link">
-          <RiBarChartFill className="me-2" />
-          <span>Reports</span>
+            <RiBarChartFill className="me-2" />
+            <span>Reports</span>
           </Link>
         </li>
         <li className="nav-item">
@@ -77,7 +62,8 @@ function SideBar() {
             <span>Settings</span>
           </Link>
         </li>
-        <li className="nav-item">
+        
+        <li className="nav-item logout">
           <button onClick={handleLogoutClick} className="nav-link logout-button">
             <RiLogoutCircleLine className="me-2" />
             <span>Logout</span>
@@ -85,14 +71,14 @@ function SideBar() {
         </li>
       </ul>
 
-      {/* Using the Modal */}
-      <Modal 
-        show={showLogoutConfirm} 
-        onClose={handleCancelLogout} 
-        onConfirm={handleConfirmLogout} 
-      />
+      {showLogoutConfirm && (
+        <Modal 
+          show={showLogoutConfirm} 
+          onClose={handleCancelLogout} 
+          onConfirm={handleConfirmLogout} 
+        />
+      )}
     </aside>
   );
 }
-
 export default SideBar;
