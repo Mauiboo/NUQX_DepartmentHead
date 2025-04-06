@@ -60,7 +60,10 @@
 .button-group {
     display: flex;
     gap: 10px; 
-    margin-top: 10px; 
+    top: 50px; 
+    right: 170px;
+    position: relative;
+
 }
 
 .button-group button {

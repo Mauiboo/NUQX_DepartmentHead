@@ -11,7 +11,7 @@ import Reports from './pages/Reports';
 import Services from './pages/Services';
 import Staff from './pages/Staff';
 import Settings from './pages/Settings';
-
+import Transaction from './pages/Transaction';
 
 function App() {
   return (
@@ -30,6 +30,7 @@ function App() {
         <Route path='/services' element={<Services />} />
         <Route path='/staff' element={<Staff />} />
         <Route path='/settings' element={<Settings />} />
+        <Route path='/transaction' element={<Transaction />} />
       </Routes>
     </div>
   );

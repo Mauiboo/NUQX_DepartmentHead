@@ -112,7 +112,6 @@ const Settings = () => {
           gridColumn: '2',
           gridRow: '1',
           backgroundColor: 'white',
-          borderRadius: '8px',
           boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
           overflow: 'hidden'
         }}>
@@ -257,7 +256,6 @@ const Settings = () => {
           top: '190px',
           left: '0',
           backgroundColor: 'white',
-          borderRadius: '8px',
           boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
           overflow: 'hidden',
           width: '300px',
@@ -309,7 +307,7 @@ const Settings = () => {
                   style={{
                     position: 'absolute',
                     right: '10px',
-                    top: '20%',
+                    top: '50%',
                     transform: 'translateY(-50%)',
                     background: 'none',
                     border: 'none',
@@ -353,7 +351,7 @@ const Settings = () => {
                   style={{
                     position: 'absolute',
                     right: '10px',
-                    top: '20%',
+                    top: '50%',
                     transform: 'translateY(-50%)',
                     background: 'none',
                     border: 'none',
@@ -397,7 +395,7 @@ const Settings = () => {
                   style={{
                     position: 'absolute',
                     right: '10px',
-                    top: '20%',
+                    top: '50%',
                     transform: 'translateY(-50%)',
                     background: 'none',
                     border: 'none',
@@ -418,7 +416,7 @@ const Settings = () => {
           gridRow: '2',
           display: 'flex',
           transform: 'translateX(90px)', 
-          marginTop: '100px',
+          marginTop: '0px',
           
 
         }}>
@@ -429,10 +427,7 @@ const Settings = () => {
               color: 'white',
               padding: '10px 30px',
               fontSize: '20px',
-              border: 'none',
-              borderRadius: '6px',
               cursor: 'pointer',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
             }}
           >
             Save Changes

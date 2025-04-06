@@ -19,11 +19,7 @@ function Logo() {
                 NATIONAL UNIVERSITY
                 </h1>
             </a>
-            
-            <i
-                className="bi bi-list toggle-sidebar-btn"
-                onClick={handleToggleSideBar}
-            ></i>
+         
         </div>
     );
 }

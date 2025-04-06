@@ -1,24 +1,333 @@
-import React from 'react';
-import LineGraph from '../Report/LineGraph';
-import Dropdown from '../Report/Dropdown';
-import SummaryReport from '../Report/SummaryReport';
-import DownloadButton from '../Report/DownloadButton';
+import React, { useState } from 'react';
+import { Line } from 'react-chartjs-2';
+import { Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import { FileText } from 'lucide-react';
 
-const Reports = () => {
-  return (
-      <div className="report-container">
-          <div className="report-header">
-              <Dropdown />
-              <DownloadButton />
-          </div>
+Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-          <div className="report-content">
-              <LineGraph />
-              <SummaryReport mostActive="Feb 9" leastActive="Feb 3" />
-          </div>
+function Reports() {
+  const [timePeriod, setTimePeriod] = useState('Today');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  
+  // sample data lang to
+  const reportData = {
+    'Today': {
+      transactions: 150,
+      avgTurnaround: '00:12:08',
+      peakHour: '1PM - 2PM',
+      peakActivity: 'Enrollment',
+      chartLabels: ['9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM'],
+      chartData: [0.08, 0.12, 0.15, 0.22, 0.28, 0.20, 0.14, 0.10],
+    },
+    'This Week': {
+      transactions: 980,
+      avgTurnaround: '00:14:32',
+      peakHour: 'Monday',
+      peakActivity: 'Registration',
+      chartLabels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      chartData: [0.18, 0.14, 0.15, 0.12, 0.22, 0.10, 0.05],
+    },
+    'This Month': {
+      transactions: 3250,
+      avgTurnaround: '00:13:45',
+      peakHour: 'Week 2',
+      peakActivity: 'Enrollment',
+      chartLabels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+      chartData: [0.14, 0.25, 0.18, 0.12],
+    },
+    'This Year': {
+      transactions: 42680,
+      avgTurnaround: '00:15:11',
+      peakHour: 'April',
+      peakActivity: 'Registration',
+      chartLabels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+      chartData: [0.10, 0.12, 0.14, 0.24, 0.18, 0.15, 0.11, 0.09],
+    },
+  };
+
+  // get data based on selected time period
+  const currentData = reportData[timePeriod];
+  
+  // data for chart
+  const chartData = {
+    labels: currentData.chartLabels,
+    datasets: [
+      {
+        label: 'Avg. Turnaround Time',
+        data: currentData.chartData.map(time => time * 30), 
+        fill: false,
+        backgroundColor: '#35408E',
+        borderColor: '#35408E',
+        tension: 0.4,
+        pointRadius: 4,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        min: 0,
+        max: 30,
+        ticks: {
+          stepSize: 5,
+          callback: function(value) {
+            const minutes = Math.floor(value);
+            return minutes < 10 ? `00:0${minutes}` : `00:${minutes}`;
+          },
+          color: '#35408E',
+          font: {
+            size: 18,
+            weight: 'bold',
+          },
+        },
+        grid: {
+          display: false,
+        },
+      },
+      x: {
+        ticks: {
+          color: '#35408E',
+          font: {
+            size: 18,
+            weight: 'bold',
+          },
+        },
+        grid: {
+          display: false,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
+
+  // dialog component
+  const Dialog = ({ onClose }) => {
+    // get date for the report
+    const currentDate = new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    
+    // generate wait times based sa data
+    const avgWaitTimeMinutes = Math.floor(parseFloat(currentData.avgTurnaround.split(':')[1]));
+    const longestWaitTime = Math.min(30, avgWaitTimeMinutes * 2.5); 
+    const shortestWaitTime = Math.max(1, avgWaitTimeMinutes * 0.4); 
+    
+    return (
+      <div style={{
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'white',
+        padding: '2rem',
+        boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
+        zIndex: 1000,
+        borderRadius: '8px',
+        width: '450px',
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+          <h2 style={{ color: '#35408E', margin: 0 }}>Report Details</h2>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+            <span style={{ fontSize: '1.5rem', color: '#35408E', fontWeight: 'bold' }}>X</span>
+          </button>
+        </div>
+        
+        <div style={{ 
+          borderTop: '1px solid #e0e0e0', 
+          borderBottom: '1px solid #e0e0e0', 
+          padding: '1rem 0', 
+          marginBottom: '1.5rem'
+        }}>
+          <p style={{ margin: '0.5rem 0' }}><strong>Date Generated:</strong> {currentDate}</p>
+          <p style={{ margin: '0.5rem 0' }}><strong>Generated By:</strong> Damon Salvatore</p>
+          <p style={{ margin: '0.5rem 0' }}><strong>Department:</strong> Registrar</p>
+        </div>
+        
+        <div style={{ marginBottom: '1.5rem' }}>
+          <p style={{ margin: '0.5rem 0' }}><strong>Total Queues Processed:</strong> {currentData.transactions}</p>
+          <p style={{ margin: '0.5rem 0' }}><strong>Average Wait Time:</strong> {avgWaitTimeMinutes} mins</p>
+          <p style={{ margin: '0.5rem 0' }}><strong>Peak Hours:</strong> {currentData.peakHour}</p>
+          <p style={{ margin: '0.5rem 0' }}><strong>Most Frequent Service Requests:</strong> {currentData.peakActivity}</p>
+          <p style={{ margin: '0.5rem 0' }}><strong>Longest Wait Time:</strong> {Math.round(longestWaitTime)} mins</p>
+          <p style={{ margin: '0.5rem 0' }}><strong>Shortest Wait Time:</strong> {Math.round(shortestWaitTime)} mins</p>
+        </div>
+        
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <button style={{ 
+            backgroundColor: '#35408E', 
+            color: 'white', 
+            padding: '0.75rem 1rem', 
+            borderRadius: '0.5rem', 
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+          }}>
+            <FileText color="white" size={18} /> Download PDF
+          </button>
+        </div>
       </div>
+    );
+  };
+
+  // DownloadButton to open dialog
+  const DownloadButton = () => {
+    return (
+      <button onClick={() => setIsDialogOpen(true)} style={{ 
+          backgroundColor: '#35408E', 
+          color: 'white', 
+          padding: '0.75rem', 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: '0.5rem', 
+          border: 'none',
+          cursor: 'pointer',
+          position: 'fixed',  
+          bottom: '90px',     
+          right: '160px',      
+          zIndex: 1000,     
+          height: '50px'
+        
+      }}>
+        <FileText color="white" />
+        Download Report
+      </button>
+    );
+  };
+
+  return (
+    <div className="reports-container" style={{ padding: '2rem', maxWidth: '1200px', margin: '7rem auto 0 auto', position: 'relative' }}>
+      <div className="reports-header" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
+        <div className="time-period-selector">
+          <select 
+            value={timePeriod}
+            onChange={(e) => setTimePeriod(e.target.value)}
+            style={{ 
+              padding: '0.5rem 1rem',  
+              color: '#35408E',
+              backgroundColor: 'white',
+              cursor: 'pointer',
+              width: '200px',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+              marginLeft: '90px',
+              position: 'relative',
+              top: '35px', 
+
+            }}
+          >
+            <option value="Today">Today</option>
+            <option value="This Week">This Week</option>
+            <option value="This Month">This Month</option>
+            <option value="This Year">This Year</option>
+          </select>
+        </div>
+
+        {/* Summary Boxes */}
+        <div className="summary-boxes" 
+        style={{ 
+          display: 'flex', 
+          gap: '2rem', 
+          top: '30px', 
+          position: 'relative',
+          left: '250px',
+          height: '90px',
+          
+          }}>
+          {/* Transactions Box */}
+          <div className="summary-box" style={{ width: '300px', overflow: 'hidden', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',  }}>
+            <div className="box-header" style={{ backgroundColor: '#35408E', color: 'white', padding: '0.5rem', textAlign: 'center',  }}>
+              NUMBER OF TRANSACTIONS
+            </div>
+            <div className="box-content" style={{ padding: '0.8rem', fontSize: '17px', textAlign: 'center', color: 'black' }}>
+              {currentData.transactions}
+            </div>
+          </div>
+
+          {/* Turnaround Time Box */}
+          <div className="summary-box" style={{ width: '300px',  overflow: 'hidden', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}>
+            <div className="box-header" style={{ backgroundColor: '#35408E', color: 'white', padding: '0.5rem', textAlign: 'center' }}>
+              AVG. TURNAROUND TIME
+            </div>
+            <div className="box-content" style={{ padding: '0.8rem', fontSize: '17px', textAlign: 'center', color: 'black' }}>
+              {currentData.avgTurnaround}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Second Row of Summary Boxes */}
+      <div className="peak-time-row" style={{ display: 'flex',height: '90px', top: '30px',  justifyContent: 'flex-end', gap: '2rem', marginBottom: '2rem', position: 'relative',
+           left: '250px' }}>
+        {/* Peak Hour Box */}
+        <div className="summary-box" style={{ width: '300px',  overflow: 'hidden', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}>
+          <div className="box-header" style={{ backgroundColor: '#35408E', color: 'white', padding: '0.5rem', textAlign: 'center' }}>
+            NUMBER OF TRANSACTIONS
+          </div>
+          <div className="box-content" style={{ padding: '0.8rem', fontSize: '17px', textAlign: 'center', color: 'black' }}>
+            {currentData.peakHour}
+          </div>
+        </div>
+
+        {/* Peak Activity Box */}
+        <div className="summary-box" style={{ width: '300px', border: '0px solid #e0e0e0', overflow: 'hidden', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}>
+          <div className="box-header" style={{ backgroundColor: '#35408E', color: 'white', padding: '0.5rem', textAlign: 'center' }}>
+            AVG. TURNAROUND TIME
+          </div>
+          <div className="box-content" style={{ padding: '0.8rem', fontSize: '17px', textAlign: 'center', color: 'black' }}>
+            {currentData.peakActivity}
+          </div>
+        </div>
+      </div>
+
+      {/* Chart Section */}
+      <div className="chart-container" 
+      style={{ 
+        height: '400px', 
+        position: 'relative',
+        top: '10px', 
+        marginLeft: '100px', 
+        width: '1200px', 
+        height: '400px'
+        
+      }}
+    >
+        <Line data={chartData} options={chartOptions} />
+      </div>
+      
+      {/* Average Turnaround Time */}
+      <div className="avg-turnaround" 
+      style={{ 
+        textAlign: 'center', 
+        color: '#35408E', 
+        fontSize: '1.2rem',
+        position: 'relative',
+        top: '40px', 
+        marginLeft: '200px' 
+
+
+         }}>
+
+        AVG. TURNAROUND TIME: {currentData.avgTurnaround}
+      </div>
+
+      {/* Download Report Button */}
+      <div style={{ position: 'absolute', bottom: '1rem', right: '-18rem' }}>
+        <DownloadButton />
+      </div>
+
+      {isDialogOpen && <Dialog onClose={() => setIsDialogOpen(false)} />}
+    </div>
   );
-};
+}
 
 export default Reports;
-

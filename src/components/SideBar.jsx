@@ -7,7 +7,8 @@ import {
   RiDashboardLine, 
   RiTeamLine, 
   RiSettings4Line, 
-  RiLogoutCircleLine 
+  RiLogoutCircleLine,
+  RiStackLine,
 } from 'react-icons/ri';
 import Modal from './Modal';
 
@@ -34,19 +35,31 @@ function SideBar() {
       <ul className="sidebar-nav" id="sidebar-nav">
         <li className="nav-item">
           <Link to="/dashboard" className="nav-link">
-            <RiFileListLine className="me-2" />
+            <RiDashboardLine className="me-2" />
             <span>Dashboard</span>
           </Link>
         </li>
+
         <li className="nav-item">
           <Link to="/reports" className="nav-link">
             <RiBarChartFill className="me-2" />
             <span>Reports</span>
           </Link>
         </li>
+
+
+        <li className="nav-item">
+          <Link to="/transaction" className="nav-link">
+          <RiFileListLine className="me-2" />
+          <span>Transactions</span>
+          </Link>
+        </li>
+
+       
+
         <li className="nav-item">
           <Link to="/services" className="nav-link">
-            <RiDashboardLine className="me-2" />
+            <RiStackLine className="me-2" />
             <span>Services</span>
           </Link>
         </li>

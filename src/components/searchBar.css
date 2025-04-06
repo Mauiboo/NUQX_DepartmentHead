@@ -1,6 +1,9 @@
 .header .search-bar {
     min-width: 360px;
     padding: 0 20px;
+    position: absolute; 
+    left: 400px; 
+
   }
   
   @media (max-width: 1199px) {
@@ -48,15 +51,18 @@
   }
   
   .header .search-form button {
-    border: 0;
-    padding: 0;
-    margin-right: 940px;
-    bottom: 45px;
+    border: none;
     background: none;
-  }
+    cursor: pointer;
+    position: absolute;
+    right: 40px;
+    top: 46%;
+    transform: translateY(-50%);
+}
 
-  .header .search-form button i {
-    color: #35408E;
-    margin-right: 40px;
-  }
+.header .search-form button i {
+    font-size: 18px;
+    color: #012970;
+}
+
   

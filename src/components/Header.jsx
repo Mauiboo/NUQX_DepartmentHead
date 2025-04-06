@@ -13,11 +13,9 @@ function Header() {
    <Logo/>
    {/* {searchbar} */}
    <SearchBar />
-
       {/* {nav} */}
       <Nav />
       
-
 </header>
   )
 }

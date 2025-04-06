@@ -5,7 +5,6 @@ const ProcessDropdown = ({ index, selectedValues = [], onChange, processes }) =>
     <div className="process-item">
       <span className="process-text">Process {index + 1}</span>
 
-      {/* Generate 5 select dropdowns */}
       {[0].map((subIndex) => (
         <select
           key={subIndex}
